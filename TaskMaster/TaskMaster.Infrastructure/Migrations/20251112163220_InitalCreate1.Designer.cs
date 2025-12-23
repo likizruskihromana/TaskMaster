@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TaskMaster.Infrastructure.Data;
@@ -11,9 +12,11 @@ using TaskMaster.Infrastructure.Data;
 namespace TaskMaster.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251112163220_InitalCreate1")]
+    partial class InitalCreate1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,34 +393,6 @@ namespace TaskMaster.Infrastructure.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("TaskMaster.Domain.Entities.TokenBlackList", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
-
-                    b.Property<DateTime>("BlackListedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("ExpiresAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("TokenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ExpiresAt");
-
-                    b.HasIndex("TokenId")
-                        .IsUnique();
-
-                    b.ToTable("TokenBlacklists");
-                });
-
             modelBuilder.Entity("TaskMaster.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -430,6 +405,7 @@ namespace TaskMaster.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Avatar")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -451,9 +427,6 @@ namespace TaskMaster.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("LastLoginAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("LastLogoutAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LastName")

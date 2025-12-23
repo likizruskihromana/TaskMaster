@@ -1,17 +1,17 @@
-﻿namespace TaskMaster.Domain.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace TaskMaster.Domain.Entities
 {
-    public class User
+    public class User : IdentityUser<int>
     {
         // primary key
-        public int Id { get; set; }
-        public required string Email { get; set; }
-        public required string UserName { get; set; }
-        public required string PasswordHash { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Avatar {  get; set; }
+        public string? Avatar {  get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastLoginAt { get; set; }
+        public DateTime? LastLogoutAt { get; set; }
+
         // ===== NAVIGATION PROPERTIES =====
         // this defines relationships between entities
         public virtual ICollection<Project> OwnedProjects { get; set; } = new List<Project>();

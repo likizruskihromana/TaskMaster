@@ -1,24 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using TaskMaster.Domain.Common;
 using TaskMaster.Domain.Entities;
 
 namespace TaskMaster.Infrastructure.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<int>,int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
         // every DbSet is Table in database
-        public DbSet<User> Users { get; set; }
+        // public DbSet<User> Users { get; set; } // Have this integrated in 
         public DbSet<Project> Projects { get; set; }
         public DbSet<Domain.Entities.Task> Tasks { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<ProjectMember> ProjectMembers { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
+        public DbSet<TokenBlackList> TokenBlacklists { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -110,6 +114,11 @@ namespace TaskMaster.Infrastructure.Data
                 .WithMany(u => u.ActivityLogs)
                 .HasForeignKey(al => al.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+            });
+            modelBuilder.Entity<TokenBlackList>(entity =>
+            {
+                entity.HasIndex(t => t.TokenId).IsUnique();
+                entity.HasIndex(t => t.ExpiresAt);
             });
         }
 
