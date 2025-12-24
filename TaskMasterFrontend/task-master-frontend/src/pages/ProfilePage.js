@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import React, { useState } from 'react';
 import api from '../api/API';
+import Logout from '../components/Logout';
 function ProfilePage() {
     const navigate = useNavigate(); // Hook to programmatically navigate between routes
     const [userProfile, setUserProfile] = useState(null);
@@ -29,13 +30,12 @@ function ProfilePage() {
     <div className="ProfilePage">
       <h1>Welcome to the Profile Page!</h1>
         <Button variant="dark" onClick={() => navigate('/about')}>Go to About Page</Button>
-        <Button variant="dark" onClick={() => navigate('/home')}>Go to Login Page</Button>
-        <Button variant="dark" onClick={() => navigate('/logout')}>Logout</Button>
+        <Button variant="dark" onClick={() => navigate('/home')}>Go to Home Page</Button>
+        <Logout/>
 
         {userProfile && (
           <div style={{marginTop: '20px', padding: '15px', background: '#f8f9fa', borderRadius: '5px'}}>
             <h4>Korisnički profil:</h4>
-            <p><strong>ID:</strong> {userProfile.userId}</p>
             <p><strong>Email:</strong> {userProfile.email}</p>
             <p><strong>Ime:</strong> {userProfile.name}</p>
           </div>

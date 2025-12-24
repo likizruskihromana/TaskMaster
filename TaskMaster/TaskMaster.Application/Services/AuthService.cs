@@ -192,7 +192,6 @@ namespace TaskMaster.Application.Services
         {
             return new UserDto
             {
-                Id = user.Id,
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,

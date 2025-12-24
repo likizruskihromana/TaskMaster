@@ -1,4 +1,3 @@
-// Logout.js (ili dodaj u Navbar)
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -15,14 +14,14 @@ function Logout() {
     } finally {
       localStorage.removeItem('token');
       delete api.defaults.headers.common['Authorization'];
-      navigate('/home');
+      navigate('/login');
     }
   };
 
   return (
     <Button variant="outline-danger" onClick={handleLogout}>
       Logout
-    </Button>
+    </Button>   
   );
 }
 
