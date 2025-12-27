@@ -16,7 +16,7 @@ function ProfilePage() {
         try {
         const response = await api.get('/api/Users/profile');
         console.log('Profile:', response.data);
-        setUserProfile(response.data);
+        setUserProfile(response.data.user);
         setMessage(response.data.message);
         } catch (err) {
         console.error('Profile error:', err);
@@ -37,7 +37,10 @@ function ProfilePage() {
           <div style={{marginTop: '20px', padding: '15px', background: '#f8f9fa', borderRadius: '5px'}}>
             <h4>Korisnički profil:</h4>
             <p><strong>Email:</strong> {userProfile.email}</p>
-            <p><strong>Ime:</strong> {userProfile.name}</p>
+            <p><strong>Ime:</strong> {userProfile.fullName}</p>
+            <p style={{margin: '4px 0'}}>📅 Created: {userProfile.createdAt ? new Date(userProfile.createdAt).toLocaleString() : 'N/A'}</p>
+            <p style={{margin: '4px 0'}}>🕒 Last Login: {userProfile.lastLoginAt ? new Date(userProfile.lastLoginAt).toLocaleString() : 'Never'}</p>
+            <p style={{margin: '4px 0'}}>↩️ Last Logout: {userProfile.lastLogoutAt ? new Date(userProfile.lastLogoutAt).toLocaleString() : 'N/A'}</p>
           </div>
         )}
     </div>

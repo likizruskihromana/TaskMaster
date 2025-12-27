@@ -67,6 +67,8 @@ builder.Services.AddAuthentication(options =>
     // App services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenBlackListService, TokenBlackListService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
 // Controllers and API config
 builder.Services.AddControllers();
     // Swagger config

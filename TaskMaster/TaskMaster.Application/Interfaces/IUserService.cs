@@ -1,7 +1,9 @@
-﻿using TaskMaster.Application.DTOs.Auth;
+﻿using System.Collections;
+using TaskMaster.Application.DTOs.Auth;
 using TaskMaster.Application.DTOs.Profile;
 
 public interface IUserService
 {
-    Task<ProfileResultDto> GetAllUsersAsync(RegisterDto registerDto);
+    Task<ArrayList> GetAllUsersAsync();
+    Task<ProfileResultDto> GetProfileAsync(string email);
 }

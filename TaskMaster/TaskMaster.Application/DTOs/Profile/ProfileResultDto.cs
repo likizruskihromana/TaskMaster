@@ -9,5 +9,8 @@ namespace TaskMaster.Application.DTOs.Profile
             public string FullName => $"{FirstName} {LastName}";
             public string? Email { get; set; } = string.Empty;
             public string? Avatar { get; set; }
-        }
+            public DateTime CreatedAt { get; set; }
+            public DateTime LastLoginAt { get; set; }
+            public DateTime? LastLogoutAt { get; set; }
+    }
 }
