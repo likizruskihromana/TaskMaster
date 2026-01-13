@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using TaskMaster.Application.DTOs.Auth;
@@ -28,8 +30,6 @@ public class AuthController : ControllerBase
 
         return Ok(result);
     }
-
-
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     { 
@@ -46,8 +46,6 @@ public class AuthController : ControllerBase
     }
     [HttpPost("logout")]
     [Authorize]  // Requires authentication
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Logout()
     {
         // Get user ID from JWT token claims

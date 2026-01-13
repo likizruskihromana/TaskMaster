@@ -31,6 +31,8 @@ function ProfilePage() {
       <h1>Welcome to the Profile Page!</h1>
         <Button variant="dark" onClick={() => navigate('/about')}>Go to About Page</Button>
         <Button variant="dark" onClick={() => navigate('/home')}>Go to Home Page</Button>
+        <Button variant="dark" onClick={() => navigate('/update-profile')}>Update Profile</Button>
+        <Button variant="dark" onClick={() => navigate('/password-change')}>Change Password</Button>
         <Logout/>
 
         {userProfile && (
